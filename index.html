@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+  <!-- jq -->
+    <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+    
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="plugs/bootstrap/css/bootstrap.min.css">
+	<script type="text/javascript" src="plugs/bootstrap/js/bootstrap.min.js"></script>
+	
+	<!-- 分页插件 -->
+	<link rel="stylesheet" href="plugs/bootstrap-table/bootstrap-table.min.css">
+    <script type="text/javascript" src="plugs/bootstrap-table/bootstrap-table.min.js"></script>
+    <script type="text/javascript" src="plugs/bootstrap-table/bootstrap-table-locale-all.min.js"></script>
+</head>
+<body>
+	<table id="table">
+    <thead>
+    <tr>
+        <th data-field="state" data-checkbox="true"></th>
+        <th data-field="name">Name</th>
+        <th data-field="stargazers_count">Stars</th>
+        <th data-field="forks_count">Forks</th>
+    </tr>
+    </thead>
+</table>
+</body>
+</html>
+<script type="text/javascript">
+   			
+// 			function getdata(){
+// 				var data = [];
+// 				$.ajax({  
+// 			            type : "GET",  
+// 			            url : "data.json",  
+// 			            contentType: "application/json;charset=utf-8",  
+// 			            dataType:"jsonp",  
+// 			            data:'',  
+// 			            jsonp:'callback',  
+// 			            success:function (msg) {            
+// 			                data=msg.data;
+// //						                $('.table').bootstrapTable('load', msg);  
+// 			            },  
+// 			            error:function(){  
+// 			                alert("错误");  
+// 			            }  
+// 					 }); 
+// 					return data;
+// 			}
+// 			
+var data = [
+    {
+        "name": "bootstrap-table",
+        "stargazers_count": "526",
+        "forks_count": "122",
+        "description": "An extended Bootstrap table with radio, checkbox, sort, pagination, and other added features. (supports twitter bootstrap v2 and v3) "
+    },
+    {
+        "name": "multiple-select",
+        "stargazers_count": "288",
+        "forks_count": "150",
+        "description": "A jQuery plugin to select multiple elements with checkboxes :)"
+    },
+    {
+        "name": "bootstrap-show-password",
+        "stargazers_count": "32",
+        "forks_count": "11",
+        "description": "Show/hide password plugin for twitter bootstrap."
+    },
+    {
+        "name": "blog",
+        "stargazers_count": "13",
+        "forks_count": "4",
+        "description": "my blog"
+    },
+    {
+        "name": "scutech-redmine",
+        "stargazers_count": "6",
+        "forks_count": "3",
+        "description": "Redmine notification tools for chrome extension."
+    }
+];
+
+$(function () {
+    $('#table').bootstrapTable({
+        data: data,
+        locale:'zh-CN',//中文支持
+		pagination: true,//是否开启分页（*）
+        pageNumber:1,//初始化加载第一页，默认第一页
+        pageSize: 3,//每页的记录行数（*）
+        pageList: [2,3,4],//可供选择的每页的行数（*）
+        sidePagination: "client", //分页方式：client客户端分页，server服务端分页（*）
+    });
+    $('#table').on('check.bs.table', function (e, row, $el) {
+    	alert('check index: ' + $el.closest('tr').data('index'));
+    });
+    $('#table').on('uncheck.bs.table', function (e, row, $el) {
+    	alert('uncheck index: ' + $el.closest('tr').data('index'));
+    });
+});
+			</script>
